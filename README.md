@@ -6,7 +6,7 @@
 
 ## Temática
 
-Libreria digital, 
+Libreria digital
 
 ## Descripción
 
