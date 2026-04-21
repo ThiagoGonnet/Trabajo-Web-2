@@ -1,0 +1,16 @@
+<ul>
+
+  <?php foreach($libros as $libro) { ?>
+  <li> Titulo: <?php echo $libro->titulo   ?> </li>
+  <li> Año de publicacion:  <?php echo $libro->anio_de_publicacion   ?> </li>
+  <li> Disponible:
+    <?php if($libro->disponible == 1){
+      echo "Si";
+      }
+      else {
+        echo "No";
+        }   ?>
+  </li>
+  <a href="verLibro/<?php echo $libro->id_libro ?>"> Leer más</a>
+  <?php } ?>
+</ul>
