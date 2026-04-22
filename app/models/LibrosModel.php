@@ -8,6 +8,9 @@ class LibrosModel
   {
     $this->db = new PDO('mysql:host=localhost;dbname=db_libreria;charset=utf8', 'root', '');
   }
+
+  //------------------------Libros---------------------------
+
   public function obtenerLibros()
   {
     $query = $this->db->prepare('SELECT * FROM libros');
@@ -40,6 +43,34 @@ class LibrosModel
   {
     $query = $this->db->prepare("UPDATE libros SET 'titulo' = ?, 'sinopsis' = ?, 'anio_de_publicacion' = ?, 'disponible' = ?, 'tapa_libro' = ?, 'id_autor' = ?) values(?,?,?,?,?,?)");
     $query->execute([$titulo, $sinopsis, $anio_de_publicacion, $disponible, $tapa_libro, $id_autor]);
+    return $query->rowCount();
+  }
+
+  //-----------------------------Autores----------------------------------
+
+  public function obtenerAutores(){
+    $query = $this->db->prepare('SELECT * FROM autores');
+    $query->execute();
+    $autores = $query->fetchAll(PDO::FETCH_OBJ);
+    return $autores;
+  }
+  //public function obtenerAutorPorId($id){}
+
+  public function agregarAutor($nombre, $fechaDeNacimiento, $nacionalidad, $biografia){
+    $query = $this->db->prepare("INSERT INTO libros('nombre', 'fechaDeNacimiento', 'nacionalidad', 'biografia') values(?,?,?,?)");
+    $query->execute([$nombre, $fechaDeNacimiento, $nacionalidad, $biografia]);
+    return $this->db->lastInsertId();
+  }
+
+  public function eliminarAutor($id_autor){
+    $query = $this->db->prepare('DELETE FROM autores WHERE id_autor = ?');
+    $query->execute([$id_autor]);
+    return $query->rowCount();
+  }
+
+  public function actualizarAutor($nombre, $fechaDeNacimiento, $nacionalidad, $biografia){
+    $query = $this->db->prepare("UPDATE autores SET 'nombre' = ?, 'fechaDeNacimiento' = ?, 'nacionalidad' = ?, 'biografia' = ?) values(?,?,?,?)");
+    $query->execute([$nombre, $fechaDeNacimiento, $nacionalidad, $biografia]);
     return $query->rowCount();
   }
 }

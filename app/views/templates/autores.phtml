@@ -1,0 +1,17 @@
+<ul>
+
+  <?php foreach($autores as $autor) { ?>
+  <li> Nombre: <?php echo $autor->nombre   ?> </li>
+  <li> Fecha De Nacimiento:  <?php echo $autor->fechaDeNacimiento   ?> </li>
+  <li> Nacionalidad:  <?php echo $autor->nacionalidad   ?> </li>
+  <li> Disponible:
+    <?php if($autor->disponible == 1){
+      echo "Si";
+      }
+      else {
+        echo "No";
+        }   ?>
+  </li>
+  <a href="verLibro/<?php echo $libro->id_libro ?>"> Leer más</a>
+  <?php } ?>
+</ul>
