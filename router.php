@@ -5,7 +5,7 @@ define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'
 
 // require once controllers
 require_once "./app/controllers/LibrosController.php";
-/*require_once "./app/controllers/AutoresController.php"; */
+require_once "./app/controllers/AutoresController.php";
 
 $action = "home";
 
@@ -39,6 +39,27 @@ switch ($params[0]) {
   case 'actualizarLibro':
     $controller = new LibrosController();
     $controller->actualizarLibro();
+    break;
+  case 'autores':
+    $controller = new AutoresController();
+    $controller->obtenerAutores();
+    break;
+    case 'verAutor':
+    $controller = new AutoresController();
+    $id = $params[1];
+    $controller->mostrarAutorPorId($id);
+    break;
+  case 'agregarAutor':
+    $controller = new AutoresController();
+    $controller->agregarAutor();
+    break;
+  case 'eliminarLibro':
+    $controller = new AutoresController();
+    $controller->eliminarAutor();
+    break;
+  case 'actualizarLibro':
+    $controller = new AutoresController();
+    $controller->actualizarAutor();
     break;
   default:
     echo "Error 404 not found";

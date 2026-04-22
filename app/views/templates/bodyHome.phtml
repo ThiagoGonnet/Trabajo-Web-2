@@ -1,0 +1,60 @@
+<h1>Agregar Libro</h1>
+<form action="agregarLibro" method="post">
+  <label for="titulo">Ingrese el titulo</label>
+  <input type="text" name="titulo">
+  <label for="anio">Ingrese el año de publicacion</label>
+  <input type="text" name="anio">
+  <label for="sinopsis">Ingrese la sinopsis</label>
+  <textarea name="sinopsis" require></textarea>
+  <label for="disponible">Ingrese si esta disponible</label>
+  <input type="checkbox" name="disponible" require>
+  <label for="tapa">Ingrese la tapa del libro</label>
+  <input type="text" name="tapa">
+  <label for="titulo">Ingrese el autor</label>
+  <select name="autor">
+    <option value=""></option>
+    <?php
+    foreach ($autores as $autor) { ?>
+      <option value="<?php echo $autor->id_autor ?>"> <?php echo $autor->nombre ?> </option>
+    <?php  } ?>
+  </select>
+  <button type="submit">Agregar</button>
+</form>
+------------------------------------------------------------------------------------------------------------
+<h1>Eliminar libro</h1>
+<form action="eliminarLibro" method="post">
+  <select name="libroAEliminar">
+    <option value=""></option>
+    <?php
+    foreach ($libros as $libro) { ?>
+      <option value="<?php echo $libro->id_libro ?>"><?php echo $libro->titulo ?></option>
+    <?php } ?>
+  </select>
+  <button type="submit">Eliminar</button>
+</form>
+
+---------------------------------------------------------------------------------------------------------------
+
+<h1>Actualizar Libro</h1>
+<form action="actualizarLibro" method="post">
+  <label for="titulo">Ingrese el titulo</label>
+  <input type="text" name="titulo">
+  <label for="anio">Ingrese el año de publicacion</label>
+  <input type="text" name="anio">
+  <label for="sinopsis">Ingrese la sinopsis</label>
+  <textarea name="sinopsis" require></textarea>
+  <label for="disponible">Ingrese si esta disponible</label>
+  <input type="checkbox" name="disponible" require>
+  <label for="tapa">Ingrese la tapa del libro</label>
+  <input type="text" name="tapa">
+  <label for="titulo">Ingrese el autor</label>
+  <select name="autor">
+    <option value=""></option>
+    <?php
+    foreach ($autores as $autor) { ?>
+      <option value="<?php echo $autor->id_autor ?>"> <?php echo $autor->nombre ?> </option>
+    <?php  } ?>
+  </select>
+  <button type="submit">Actualizar</button>
+</form>
+

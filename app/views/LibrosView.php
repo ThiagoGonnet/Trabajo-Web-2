@@ -5,6 +5,7 @@ class LibrosView
   public function mostrarInicioLibros($libros, $autores)
   {
     require_once "./app/views/templates/header.phtml";
+// require_once "./app/views/templates/bodyHome.phtml";
     require_once "./app/views/templates/form-subir-libro.phtml";
     require_once "./app/views/templates/form-eliminar-libro.phtml";
     require_once "./app/views/templates/form-actualizar-libro.phtml";

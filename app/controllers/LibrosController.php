@@ -18,6 +18,19 @@ class LibrosController
     $this->errorView = new ErrorView();
     $this->autoresController = new AutoresController();
   }
+  /*public function showHome(){
+    session_start();
+    $this->view->mostrarHeader();
+    $libros = $this->model->mostrarInicioLibros();
+    //if (!empty($_SESSION) && $_SESSION['logged']){
+     // $this->view->showCRUD($_SESSION['userName'],$categorias);
+      //$this->view->renderListProduct($products,$_SESSION['logged']);
+    //}else{
+      $this->view->mostrarHeader($libros);
+    //}
+   // $this->view->bodyHome();
+    $this->view->mostrarFooter();
+  }*/
   public function mostrarInicioLibros()
   {
     $autores = $this->autoresController->obtenerAutores(); // chequear si se puede usar el controller de autores en el controller de libros
