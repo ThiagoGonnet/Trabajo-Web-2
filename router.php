@@ -7,7 +7,7 @@ define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'
 require_once "./app/controllers/LibrosController.php";
 /*require_once "./app/controllers/AutoresController.php"; */
 
-$action = "libros";
+$action = "home";
 
 if (!empty($_GET['action'])) {
   $action = $_GET['action'];
@@ -15,6 +15,10 @@ if (!empty($_GET['action'])) {
 $params = explode('/', $action);
 
 switch ($params[0]) {
+  case 'home':
+    $controller = new LibrosController();
+    $controller->mostrarInicioLibros();
+    break;
   case 'libros':
     $controller = new LibrosController();
     $controller->mostrarLibros();
@@ -36,5 +40,6 @@ switch ($params[0]) {
     $controller = new LibrosController();
     $controller->actualizarLibro();
     break;
-  default: echo "Error 404 not found";
+  default:
+    echo "Error 404 not found";
 }

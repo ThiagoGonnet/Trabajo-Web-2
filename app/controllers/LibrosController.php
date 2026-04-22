@@ -2,30 +2,43 @@
 require_once "./app/models/LibrosModel.php";
 require_once "./app/views/LibrosView.php";
 require_once "./app/views/ErrorView.php";
+require_once "./app/controllers/AutoresController.php";
 
-class LibrosController{
+class LibrosController
+{
   private $model;
   private $view;
   private $errorView;
+  private $autoresController;
 
-  public function __construct(){
+  public function __construct()
+  {
     $this->model = new LibrosModel();
     $this->view = new LibrosView();
     $this->errorView = new ErrorView();
+    $this->autoresController = new AutoresController();
   }
-  public function mostrarLibros(){
+  public function mostrarInicioLibros()
+  {
+    $autores = $this->autoresController->obtenerAutores(); // chequear si se puede usar el controller de autores en el controller de libros
     $libros = $this->model->obtenerLibros();
-    if(empty($libros)){
+    $this->view->mostrarInicioLibros($libros, $autores);
+  }
+  public function mostrarLibros()
+  {
+    $libros = $this->model->obtenerLibros();
+    if (empty($libros)) {
       $msj = "No hay ningún libro cargado.";
-      $this->errorView->mostrarError($msj);
+      header("Location: ", BASE_URL);
     } else {
       $this->view->mostrarLibros($libros);
     }
   }
 
-  public function mostrarLibroPorId($id){
+  public function mostrarLibroPorId($id)
+  {
     $libro = $this->model->obtenerLibroPorId($id);
-    if(empty($libro)){
+    if (empty($libro)) {
       $msj = "No hay ningún libro cargado.";
       $this->errorView->mostrarError($msj);
     } else {
@@ -33,8 +46,9 @@ class LibrosController{
     }
   }
 
-  public function agregarLibro(){
-    if(empty($_POST['titulo']) || empty($_POST['anio']) || empty($_POST['sinopsis']) || empty($_POST['disponible']) || empty($_POST['tapa']) || empty($_POST['autor'])){
+  public function agregarLibro()
+  {
+    if (empty($_POST['titulo']) || empty($_POST['anio']) || empty($_POST['sinopsis']) || empty($_POST['disponible']) || empty($_POST['autor'])) {
       $msj = "Complete los campos por favor.";
       $this->errorView->mostrarError($msj);
     }
@@ -42,14 +56,37 @@ class LibrosController{
     $anio = $_POST['anio'];
     $sinopsis = $_POST['sinopsis'];
     $disponible = $_POST['disponible'];
-    $tapa = $_POST['tapa'];
     $autor = $_POST['autor'];
-    $this->model->agregarLibro($titulo, $sinopsis, $anio, $disponible, $tapa, $autor);
+    $this->model->agregarLibro($titulo, $sinopsis, $anio, $disponible, $autor);
 
-    header("Location: ", BASE_URL);
+    header("Location: " . BASE_URL);
   }
 
-  public function eliminarLibro(){}
+  public function eliminarLibro()
+  {
+    if (empty($_POST['libroAEliminar'])) {
+      $msj = "Elija un libro por favor.";
+      $this->errorView->mostrarError($msj);
+    } else {
+      $id_libro = $_POST['libroAEliminar'];
+      $this->model->eliminarLibro($id_libro);
+    }
+    header("Location: " . BASE_URL);
+  }
 
-  public function actualizarLibro(){}
+  public function actualizarLibro()
+  {
+    if (empty($_POST['titulo']) || empty($_POST['anio']) || empty($_POST['sinopsis']) || empty($_POST['disponible']) || empty($_POST['autor'])) {
+      $msj = "Complete los campos por favor.";
+      $this->errorView->mostrarError($msj);
+    }
+    $titulo = $_POST['titulo'];
+    $anio = $_POST['anio'];
+    $sinopsis = $_POST['sinopsis'];
+    $disponible = $_POST['disponible'];
+    $autor = $_POST['autor'];
+    $this->model->actualizarLibro($titulo, $sinopsis, $anio, $disponible, $autor);
+
+    header("Location: " . BASE_URL);
+  }
 }

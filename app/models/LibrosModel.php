@@ -22,13 +22,12 @@ class LibrosModel
     $libro = $query->fetch(PDO::FETCH_OBJ);
     return $libro;
   }
-  public function agregarLibro($titulo, $sinopsis, $anio_de_publicacion, $disponible, $tapa_libro, $id_autor)
+  public function agregarLibro($titulo, $sinopsis, $anio_de_publicacion, $disponible, $id_autor)
   {
-    $query = $this->db->prepare("INSERT INTO libros('titulo', 'sinopsis', 'anio_de_publicacion', 'disponible', 'tapa_libro', 'id_autor') values(?,?,?,?,?,?)");
-    $query->execute([$titulo, $sinopsis, $anio_de_publicacion, $disponible, $tapa_libro, $id_autor]);
+    $query = $this->db->prepare("INSERT INTO libros (titulo, sinopsis, anio_de_publicacion, disponible, id_autor) VALUES (?,?,?,?,?)");
+    $query->execute([$titulo, $sinopsis, $anio_de_publicacion, $disponible, $id_autor]);
     return $this->db->lastInsertId();
   }
-
   public function eliminarLibro($id_libro)
   {
     $query = $this->db->prepare('DELETE FROM libros WHERE id_libro = ?');
@@ -36,10 +35,10 @@ class LibrosModel
     return $query->rowCount();
   }
 
-  public function actualizarLibro($titulo, $sinopsis, $anio_de_publicacion, $disponible, $tapa_libro, $id_autor)
+  public function actualizarLibro($titulo, $sinopsis, $anio_de_publicacion, $disponible, $id_autor)
   {
-    $query = $this->db->prepare("UPDATE libros SET 'titulo' = ?, 'sinopsis' = ?, 'anio_de_publicacion' = ?, 'disponible' = ?, 'tapa_libro' = ?, 'id_autor' = ?) values(?,?,?,?,?,?)");
-    $query->execute([$titulo, $sinopsis, $anio_de_publicacion, $disponible, $tapa_libro, $id_autor]);
+    $query = $this->db->prepare("UPDATE libros SET 'titulo' = ?, 'sinopsis' = ?, 'anio_de_publicacion' = ?, 'disponible' = ?, 'id_autor' = ?) values(?,?,?,?,?)");
+    $query->execute([$titulo, $sinopsis, $anio_de_publicacion, $disponible, $id_autor]);
     return $query->rowCount();
   }
 }
