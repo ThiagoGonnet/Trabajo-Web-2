@@ -1,0 +1,22 @@
+<h1>Agregar Libro</h1>
+<form action="agregarLibro" method="post">
+  <label for="titulo">Ingrese el titulo</label>
+  <input type="text" name="titulo">
+  <label for="anio">Ingrese el año de publicacion</label>
+  <input type="text" name="anio">
+  <label for="sinopsis">Ingrese la sinopsis</label>
+  <textarea name="sinopsis" require></textarea>
+  <label for="disponible">Ingrese si esta disponible</label>
+  <input type="checkbox" name="disponible" require>
+  <label for="tapa">Ingrese la tapa del libro</label>
+  <input type="text" name="tapa">
+  <label for="titulo">Ingrese el autor</label>
+  <select name="autor">
+    <option value=""></option>
+    <?php
+    foreach ($autores as $autor) { ?>
+      <option value="<?php echo $autor->id_autor ?>"> <?php echo $autor->nombre ?> </option>
+    <?php  } ?>
+  </select>
+  <button type="submit">Agregar</button>
+</form>

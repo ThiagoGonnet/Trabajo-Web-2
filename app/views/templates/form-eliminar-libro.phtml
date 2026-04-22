@@ -1,0 +1,11 @@
+<h1>Eliminar libro</h1>
+<form action="eliminarLibro" method="post">
+  <select name="libroAEliminar">
+    <option value=""></option>
+    <?php
+    foreach ($libros as $libro) { ?>
+      <option value="<?php echo $libro->id_libro ?>"><?php echo $libro->titulo ?></option>
+    <?php } ?>
+  </select>
+  <button type="submit">Eliminar</button>
+</form>
