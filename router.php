@@ -1,11 +1,14 @@
 <?php
+// require once controllers
+require_once "./app/controllers/LibrosController.php";
+require_once "./app/controllers/AutoresController.php";
+require_once "./app/controllers/AuthController.php";
+
+session_start();
 
 // tag base
 define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
 
-// require once controllers
-require_once "./app/controllers/LibrosController.php";
-require_once "./app/controllers/AutoresController.php";
 
 $action = "home";
 
@@ -61,6 +64,15 @@ switch ($params[0]) {
     $controller = new AutoresController();
     $controller->actualizarAutor();
     break;
+  case 'login':
+    $controller = new AuthController();
+    $controller->mostrarLogin();
+        break;
+    case 'do_login':
+        $controller = new AuthController();
+        $controller->iniciarSesion();
+        break;
+
   default:
     echo "Error 404 not found";
 }
