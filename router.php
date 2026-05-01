@@ -47,7 +47,7 @@ switch ($params[0]) {
     $controller = new AutoresController();
     $controller->obtenerAutores();
     break;
-    case 'verAutor':
+  case 'verAutor':
     $controller = new AutoresController();
     $id = $params[1];
     $controller->mostrarAutorPorId($id);
@@ -67,12 +67,15 @@ switch ($params[0]) {
   case 'login':
     $controller = new AuthController();
     $controller->mostrarLogin();
-        break;
-    case 'do_login':
-        $controller = new AuthController();
-        $controller->iniciarSesion();
-        break;
-
+    break;
+  case 'logout':
+    $controller = new AuthController();
+    $controller->cerrarSesion();
+    break;
+  case 'do_login':
+    $controller = new AuthController();
+    $controller->iniciarSesion();
+    break;
   default:
     echo "Error 404 not found";
 }

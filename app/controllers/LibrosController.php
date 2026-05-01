@@ -31,6 +31,13 @@ class LibrosController
    // $this->view->bodyHome();
     $this->view->mostrarFooter();
   }*/
+  public function usuarioLogueado()
+  {
+    if (!isset($_SESSION['ID_USER'])) {
+      return header('Location: ' . BASE_URL . 'login');
+      die();
+    }
+  }
   public function mostrarInicioLibros()
   {
     $autores = $this->autoresController->obtenerAutores(); // chequear si se puede usar el controller de autores en el controller de libros
@@ -54,6 +61,7 @@ class LibrosController
     if (empty($libro)) {
       $msj = "No hay ningún libro cargado.";
       $this->errorView->mostrarError($msj);
+      die();
     } else {
       $this->view->mostrarLibroPorId($libro);
     }
@@ -61,9 +69,11 @@ class LibrosController
 
   public function agregarLibro()
   {
+    $this->usuarioLogueado();
     if (empty($_POST['titulo']) || empty($_POST['anio']) || empty($_POST['sinopsis']) || empty($_POST['disponible']) || empty($_POST['autor'])) {
       $msj = "Complete los campos por favor.";
       $this->errorView->mostrarError($msj);
+      die();
     }
     $titulo = $_POST['titulo'];
     $anio = $_POST['anio'];
@@ -77,9 +87,11 @@ class LibrosController
 
   public function eliminarLibro()
   {
+    $this->usuarioLogueado();
     if (empty($_POST['libroAEliminar'])) {
       $msj = "Elija un libro por favor.";
       $this->errorView->mostrarError($msj);
+      die();
     } else {
       $id_libro = $_POST['libroAEliminar'];
       $this->model->eliminarLibro($id_libro);
@@ -89,9 +101,11 @@ class LibrosController
 
   public function actualizarLibro()
   {
+    $this->usuarioLogueado();
     if (empty($_POST['titulo']) || empty($_POST['anio']) || empty($_POST['sinopsis']) || empty($_POST['disponible']) || empty($_POST['autor'])) {
       $msj = "Complete los campos por favor.";
       $this->errorView->mostrarError($msj);
+      die();
     }
     $titulo = $_POST['titulo'];
     $anio = $_POST['anio'];
