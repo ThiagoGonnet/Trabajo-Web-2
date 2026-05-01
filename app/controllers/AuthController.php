@@ -27,8 +27,8 @@ class AuthController
       $usuarioDb = $this->model->obtenerUsuario($usuario);
       if ($usuarioDb && password_verify($contraseña, $usuarioDb->contraseña)) {
         session_start();
-        $_SESSION['ID_USER'] = $usuarioDb->id; // Guardas el ID
-        $_SESSION['USERNAME'] = $usuarioDb->usuario; // Opcional, para mostrarlo
+        $_SESSION['ID_USER'] = $usuarioDb->id;
+        $_SESSION['USERNAME'] = $usuarioDb->usuario;
 
         header('Location: home');
         die();
