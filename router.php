@@ -76,6 +76,10 @@ switch ($params[0]) {
     $controller = new AuthController();
     $controller->iniciarSesion();
     break;
+  case 'deploy': // on demand
+    $controller = new DeployController();
+    $controller->deploy();
+    break;
   default:
     echo "Error 404 not found";
 }

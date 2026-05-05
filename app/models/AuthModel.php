@@ -14,26 +14,11 @@ class AuthModel
     $this->deploy();
   }
 
-  private function deploy()
-  {
-    $query = $this->db->query('SHOW TABLES');
-    $tables = $query->fetchAll();
-    if (count($tables) == 0) {
-      $sql = <<<END
-        CREATE TABLE IF NOT EXISTS ejemplo (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            nombre VARCHAR(50)
-        );
-        END;
-      $this->db->query($sql);
-    }
-  }
-
   public function obtenerUsuario($usuario)
   {
     $query = $this->db->prepare("SELECT * FROM usuarios WHERE usuario = ?");
     $query->execute([$usuario]);
-    $contraseña = $query->fetch(PDO::FETCH_OBJ);
-    return $contraseña;
+    $userDb = $query->fetch(PDO::FETCH_OBJ);
+    return $userDb;
   }
 }
