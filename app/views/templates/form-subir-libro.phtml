@@ -1,22 +1,58 @@
-<h1>Agregar Libro</h1>
-<form action="agregarLibro" method="post">
-  <label for="titulo">Ingrese el titulo</label>
-  <input type="text" name="titulo">
-  <label for="anio">Ingrese el año de publicacion</label>
-  <input type="text" name="anio">
-  <label for="sinopsis">Ingrese la sinopsis</label>
-  <textarea name="sinopsis" require></textarea>
-  <label for="disponible">Ingrese si esta disponible</label>
-  <input type="checkbox" name="disponible" require>
-  <label for="tapa">Ingrese la tapa del libro</label>
-  <input type="text" name="tapa">
-  <label for="titulo">Ingrese el autor</label>
-  <select name="autor">
-    <option value=""></option>
-    <?php
-    foreach ($autores as $autor) { ?>
-      <option value="<?php echo $autor->id_autor ?>"> <?php echo $autor->nombre ?> </option>
-    <?php  } ?>
-  </select>
-  <button type="submit">Agregar</button>
-</form>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h1 class="h4 mb-0">Agregar Libro</h1>
+                </div>
+                <div class="card-body">
+                    <form action="agregarLibro" method="post">
+
+                        <div class="row mb-3">
+                            <div class="col-md-8">
+                                <label class="form-label">Título del Libro</label>
+                                <input type="text" name="titulo" class="form-control" placeholder="Ej: Cien años de soledad" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Año de publicación</label>
+                                <input type="number" name="anio" class="form-control" placeholder="YYYY" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Sinopsis</label>
+                            <textarea name="sinopsis" class="form-control" rows="3" placeholder="Breve resumen del libro..." required></textarea>
+                        </div>
+
+                        <div class="row mb-3 align-items-end">
+                            <div class="col-md-6">
+                                <label class="form-label">Autor</label>
+                                <select name="autor" class="form-select" required>
+                                    <option value="" selected disabled>Seleccione un autor...</option>
+                                    <?php foreach ($autores as $autor) : ?>
+                                        <option value="<?= $autor->id_autor ?>"> <?= $autor->nombre ?> </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">URL de la tapa</label>
+                                <input type="text" name="tapa" class="form-control" placeholder="imagen.jpg">
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="disponible" id="disponibleCheck" checked>
+                                <label class="form-check-label" for="disponibleCheck">Disponible para préstamo</label>
+                            </div>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success btn-lg">Guardar Libro</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

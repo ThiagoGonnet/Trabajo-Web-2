@@ -1,13 +1,18 @@
 <?php
 require_once "./app/models/DeployModel.php";
-
-class DeployController(){
+require_once "./config.php";
+class DeployController{
   private $model;
 
   public function __construct(){
-    $this->model = new DeployModel();
+    $db = new PDO(
+            "mysql:host=".MYSQL_HOST.";dbname=".MYSQL_DB.";charset=utf8",
+            MYSQL_USER,
+            MYSQL_PASS
+        );
+    $this->model = new DeployModel($db);
   }
-    private function deploy()
+    public function deploy()
   {
     $this->model->deploy();
   }

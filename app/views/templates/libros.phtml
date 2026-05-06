@@ -1,16 +1,38 @@
-<ul>
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Catálogo de Libros</h2>
 
-  <?php foreach($libros as $libro) { ?>
-  <li> Titulo: <?php echo $libro->titulo   ?> </li>
-  <li> Año de publicacion:  <?php echo $libro->anio_de_publicacion   ?> </li>
-  <li> Disponible:
-    <?php if($libro->disponible == 1){
-      echo "Si";
-      }
-      else {
-        echo "No";
-        }   ?>
-  </li>
-  <a href="verLibro/<?php echo $libro->id_libro ?>"> Leer más</a>
-  <?php } ?>
-</ul>
+    <div class="row">
+        <?php foreach($libros as $libro) { ?>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">
+                            <?php echo $libro->titulo ?>
+                        </h5>
+
+                        <ul class="list-group list-group-flush mb-3">
+                            <li class="list-group-item px-0">
+                                <strong>Año:</strong> <?php echo $libro->anio_de_publicacion ?>
+                            </li>
+                            <li class="list-group-item px-0">
+                                <strong>Disponible:</strong>
+                                <?php if($libro->disponible == 1): ?>
+                                    <span class="badge bg-success">Sí</span>
+                                <?php else: ?>
+                                    <span class="badge bg-danger">No</span>
+                                <?php endif; ?>
+                            </li>
+                        </ul>
+
+                        <div class="d-grid">
+                            <a href="verLibro/<?php echo $libro->id_libro ?>" class="btn btn-outline-primary">
+                                Leer más
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+</div>

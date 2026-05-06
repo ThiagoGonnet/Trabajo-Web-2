@@ -1,22 +1,60 @@
-<h1>Actualizar Libro</h1>
-<form action="actualizarLibro" method="post">
-  <label for="titulo">Ingrese el titulo</label>
-  <input type="text" name="titulo">
-  <label for="anio">Ingrese el año de publicacion</label>
-  <input type="text" name="anio">
-  <label for="sinopsis">Ingrese la sinopsis</label>
-  <textarea name="sinopsis" require></textarea>
-  <label for="disponible">Ingrese si esta disponible</label>
-  <input type="checkbox" name="disponible" require>
-  <label for="tapa">Ingrese la tapa del libro</label>
-  <input type="text" name="tapa">
-  <label for="titulo">Ingrese el autor</label>
-  <select name="autor">
-    <option value=""></option>
-    <?php
-    foreach ($autores as $autor) { ?>
-      <option value="<?php echo $autor->id_autor ?>"> <?php echo $autor->nombre ?> </option>
-    <?php  } ?>
-  </select>
-  <button type="submit">Actualizar</button>
-</form>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow border-info">
+                <div class="card-header bg-info text-dark">
+                    <h1 class="h4 mb-0">Actualizar Libro</h1>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted small">Modifique los campos necesarios para actualizar la información en la biblioteca.</p>
+
+                    <form action="actualizarLibro" method="post">
+
+                        <div class="row mb-3">
+                            <div class="col-md-8">
+                                <label class="form-label fw-bold">Título del Libro</label>
+                                <input type="text" name="titulo" class="form-control" placeholder="Editar título..." required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold">Año de publicación</label>
+                                <input type="number" name="anio" class="form-control" placeholder="YYYY" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Sinopsis</label>
+                            <textarea name="sinopsis" class="form-control" rows="3" required></textarea>
+                        </div>
+
+                        <div class="row mb-3 align-items-end">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Autor</label>
+                                <select name="autor" class="form-select" required>
+                                    <option value="" selected disabled>Seleccione el autor...</option>
+                                    <?php foreach ($autores as $autor) : ?>
+                                        <option value="<?= $autor->id_autor ?>"> <?= $autor->nombre ?> </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">URL de la tapa</label>
+                                <input type="text" name="tapa" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="disponible" id="actualizarDisponible" checked>
+                                <label class="form-check-label" for="actualizarDisponible">Marcar como disponible</label>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-info btn-lg">Actualizar Datos</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

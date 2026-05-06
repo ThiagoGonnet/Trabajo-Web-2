@@ -1,8 +1,10 @@
 <?php
 // require once controllers
+require_once "./app/controllers/UsuariosController.php";
 require_once "./app/controllers/LibrosController.php";
 require_once "./app/controllers/AutoresController.php";
 require_once "./app/controllers/AuthController.php";
+require_once "./app/controllers/DeployController.php";
 
 session_start();
 
@@ -56,11 +58,11 @@ switch ($params[0]) {
     $controller = new AutoresController();
     $controller->agregarAutor();
     break;
-  case 'eliminarLibro':
+  case 'eliminarAutor':
     $controller = new AutoresController();
     $controller->eliminarAutor();
     break;
-  case 'actualizarLibro':
+  case 'actualizarAutor':
     $controller = new AutoresController();
     $controller->actualizarAutor();
     break;
@@ -76,6 +78,10 @@ switch ($params[0]) {
     $controller = new AuthController();
     $controller->iniciarSesion();
     break;
+  case 'register':
+      $controller = new UsuariosController();
+      $controller->mostrarFormRegistro();
+      break;
   case 'deploy': // on demand
     $controller = new DeployController();
     $controller->deploy();

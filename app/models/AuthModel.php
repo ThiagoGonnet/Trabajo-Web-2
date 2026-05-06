@@ -1,4 +1,5 @@
 <?php
+require_once "./app/models/DeployModel.php";
 
 class AuthModel
 {
@@ -11,7 +12,8 @@ class AuthModel
       MYSQL_USER,
       MYSQL_PASS
     );
-    $this->deploy();
+    $deployer = new DeployModel($this->db);
+    $deployer->deploy();
   }
 
   public function obtenerUsuario($usuario)
