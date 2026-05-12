@@ -22,7 +22,7 @@ $params = explode('/', $action);
 switch ($params[0]) {
   case 'home':
     $controller = new LibrosController();
-    $controller->mostrarInicioLibros();
+    $controller->mostrarHome();
     break;
   case 'libros':
     $controller = new LibrosController();

@@ -38,6 +38,12 @@ class LibrosController
       die();
     }
   }
+  public function mostrarHome(){
+   // session_start();
+    $this->view->mostrarHome();
+    
+
+  }
   public function mostrarInicioLibros()
   {
     //$autores = $this->autoresController->obtenerAutores(); // chequear si se puede usar el controller de autores en el controller de libros
