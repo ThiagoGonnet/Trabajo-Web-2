@@ -15,8 +15,7 @@ class AuthController
     $this->model = new AuthModel();
     $this->errorView = new errorView();
   }
-  public function mostrarLogin()
-  {
+  public function mostrarLogin(){
     return $this->view->mostrarForm();
   }
   public function iniciarSesion()
@@ -30,7 +29,7 @@ class AuthController
         $_SESSION['ID_USER'] = $usuarioDb->id;
         $_SESSION['USERNAME'] = $usuarioDb->usuario;
 
-        header('Location: home');
+        header('Location: home-admin');
         die();
       } else {
         $this->errorView->mostrarError("Los datos son incorrectos!");
@@ -41,6 +40,10 @@ class AuthController
       $this->errorView->mostrarError($msj);
       die();
     }
+  }
+  public function mostrarHomeAdmin(){
+      //session_start();
+      $this->view->mostrarInicioLibros();
   }
   public function cerrarSesion() {
     session_start();

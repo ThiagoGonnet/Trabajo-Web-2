@@ -6,14 +6,14 @@ class LibrosView
     require_once "./app/views/templates/layouts/header.phtml";
     require_once "./app/views/templates/home.phtml";
   }
-  public function mostrarInicioLibros($libros)
+  /*public function mostrarInicioLibros($libros)
   {
     require_once "./app/views/templates/layouts/header.phtml";
-    // require_once "./app/views/templates/bodyHome.phtml";
+    require_once "./app/views/templates/home-admin.phtml";
     require_once "./app/views/templates/form-subir-libro.phtml";
     require_once "./app/views/templates/form-eliminar-libro.phtml";
     require_once "./app/views/templates/form-actualizar-libro.phtml";
-  }
+  }*/
   public function mostrarLibros($libros)
   {
     require_once "./app/views/templates/layouts/header.phtml";

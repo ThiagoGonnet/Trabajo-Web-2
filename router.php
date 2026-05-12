@@ -78,10 +78,13 @@ switch ($params[0]) {
     $controller = new AuthController();
     $controller->iniciarSesion();
     break;
-  case 'register':
+  case 'home-admin':
+    $controller = new AuthController();
+    $controller->mostrarHomeAdmin();
+  /*case 'register':
       $controller = new UsuariosController();
       $controller->mostrarFormRegistro();
-      break;
+      break;*/
   case 'deploy': // on demand
     $controller = new DeployController();
     $controller->deploy();
