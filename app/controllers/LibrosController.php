@@ -40,9 +40,9 @@ class LibrosController
   }
   public function mostrarInicioLibros()
   {
-    $autores = $this->autoresController->obtenerAutores(); // chequear si se puede usar el controller de autores en el controller de libros
+    //$autores = $this->autoresController->obtenerAutores(); // chequear si se puede usar el controller de autores en el controller de libros
     $libros = $this->model->obtenerLibros();
-    $this->view->mostrarInicioLibros($libros, $autores);
+    $this->view->mostrarInicioLibros($libros);
   }
   public function mostrarLibros()
   {

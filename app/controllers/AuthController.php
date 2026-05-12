@@ -42,5 +42,9 @@ class AuthController
       die();
     }
   }
-  public function cerrarSesion() {}
+  public function cerrarSesion() {
+    session_start();
+    session_destroy();
+    header('Location: home');
+  }
 }

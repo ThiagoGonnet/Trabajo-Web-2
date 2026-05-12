@@ -2,7 +2,7 @@
 
 class LibrosView
 {
-  public function mostrarInicioLibros($libros, $autores)
+  public function mostrarInicioLibros($libros)
   {
     require_once "./app/views/layouts/header.phtml";
     // require_once "./app/views/templates/bodyHome.phtml";

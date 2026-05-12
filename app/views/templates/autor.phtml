@@ -1,8 +1,34 @@
-<ul>
-  <li>Nombre: <?= $autores->nombre ?></li>
-  <li>Fecha de Nacimiento: <?= $autores->fecha_de_nacimiento ?></li>
-  <li>Nacionalidad: <?= $autores->nacionalidad ?></li>
-  <li>Biografia: <?= $autores->biografia ?></li>
-</ul>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
 
-<a href="<?= BASE_URL ?>autores">Volver</a>
+            <div class="p-5 mb-4 bg-light rounded-3 shadow-sm border">
+                <div class="container-fluid py-2">
+                    <h1 class="display-5 fw-bold text-primary"><?= $autores->nombre ?></h1>
+
+                    <p class="badge bg-secondary mb-4">
+                        Publicado en: <?= $autores->fecha_de_nacimiento ?>
+                    </p>
+
+                    <hr class="my-4">
+
+                    <h5 class="fw-bold">Nacionalidad</h5>
+                    <p class="col-md-12 fs-5 text-muted italic">
+                        "<?= $autores->nacionalidad ?>"
+                    </p>
+
+                    <h5 class="fw-bold">Biografia</h5>
+                    <p class="col-md-12 fs-5 text-muted italic">
+                        "<?= $autores->biografia ?>"
+                    </p>
+
+                    <div class="mt-5">
+                        <a href="<?= BASE_URL ?>autores" class="btn btn-outline-secondary btn-lg">
+                            <i class="bi bi-arrow-left"></i> Volver al catálogo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

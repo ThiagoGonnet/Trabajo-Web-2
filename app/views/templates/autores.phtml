@@ -1,10 +1,32 @@
-<ul>
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Catálogo de Autores</h2>
 
-  <?php foreach($autores as $autor) { ?>
-  <li> Nombre: <?php echo $autor->nombre   ?> </li>
-  <li> Fecha De Nacimiento: <?php echo $autor->fecha_de_nacimiento  ?></li>
-  <li> Nacionalidad:  <?php echo $autor->nacionalidad   ?> </li>
-  </li>
-  <a href="verAutor/<?php echo $autor->id_autor ?>"> Leer más</a>
-  <?php } ?>
-</ul>
+    <div class="row">
+        <?php foreach($autores as $autor) { ?>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">
+                            <?php echo $autor->nombre ?>
+                        </h5>
+
+                        <ul class="list-group list-group-flush mb-3">
+                            <li class="list-group-item px-0">
+                                <strong>Año:</strong> <?php echo $autor->fecha_de_nacimiento ?>
+                            </li>
+                            
+                        </ul>
+
+                        <div class="d-grid">
+                            <a href="verAutor/<?php echo $autor->id_autor ?>" class="btn btn-outline-primary">
+                                Leer más
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+</div>
+

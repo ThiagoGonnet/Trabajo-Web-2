@@ -18,8 +18,8 @@ class AutoresController
   public function obtenerAutores()
   {
     $autores = $this->model->obtenerAutores();
-    //-------AGREGO SIGNO PARA QUE NO APAREZCAN EN EL HOME LOS AUTORES!!!!--------------
-    if (!empty($autores)) {
+    
+    if (empty($autores)) {
       $msj = "No hay ningún autor cargado.";
       header("Location: ", BASE_URL);
     } else {
@@ -28,7 +28,7 @@ class AutoresController
   }
   public function mostrarAutorPorId($id)
   {
-    $libro = $this->model->obtenerAutorPorId($id);
+    $autor = $this->model->obtenerAutorPorId($id);
     if (empty($autor)) {
       $msj = "No hay ningún autor cargado.";
       $this->errorView->mostrarError($msj);
