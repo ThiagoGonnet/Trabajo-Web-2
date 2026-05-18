@@ -47,7 +47,7 @@ switch ($params[0]) {
     break;
   case 'autores':
     $controller = new AutoresController();
-    $controller->obtenerAutores();
+    $controller->mostrarAutores();
     break;
   case 'verAutor':
     $controller = new AutoresController();

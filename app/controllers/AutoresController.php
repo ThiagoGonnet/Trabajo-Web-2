@@ -19,12 +19,15 @@ class AutoresController
   {
     $autores = $this->model->obtenerAutores();
     return $autores;
-    /* if (empty($autores)) {
+  }
+  public function mostrarAutores(){
+    $autores = $this->model->obtenerAutores();
+    if (empty($autores)) {
       $msj = "No hay ningún autor cargado.";
       header("Location: ", BASE_URL);
     } else {
       $this->view->mostrarAutores($autores);
-    }*/
+    }
   }
   public function mostrarAutorPorId($id)
   {
