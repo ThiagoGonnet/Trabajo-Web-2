@@ -58,10 +58,38 @@ class LibrosModel
     return $query->rowCount();
   }
 
-  public function actualizarLibro($titulo, $sinopsis, $anio_de_publicacion, $disponible, $id_autor)
-  {
-    $query = $this->db->prepare("UPDATE libros SET 'titulo' = ?, 'sinopsis' = ?, 'anio_de_publicacion' = ?, 'disponible' = ?, 'id_autor' = ?) values(?,?,?,?,?)");
-    $query->execute([$titulo, $sinopsis, $anio_de_publicacion, $disponible, $id_autor]);
-    return $query->rowCount();
-  }
+public function actualizarLibro(
+  $id_libro,
+  $titulo,
+  $sinopsis,
+  $anio_de_publicacion,
+  $disponible,
+  $tapa,
+  $id_autor
+)
+{
+  $query = $this->db->prepare("
+    UPDATE libros
+    SET
+      titulo = ?,
+      sinopsis = ?,
+      anio_de_publicacion = ?,
+      disponible = ?,
+      tapa_libro = ?,
+      id_autor = ?
+    WHERE id_libro = ?
+  ");
+
+  $query->execute([
+    $titulo,
+    $sinopsis,
+    $anio_de_publicacion,
+    $disponible,
+    $tapa,
+    $id_autor,
+    $id_libro
+  ]);
+
+  return $query->rowCount();
+}
 }

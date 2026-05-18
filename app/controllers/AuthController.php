@@ -2,20 +2,34 @@
 require_once "./app/models/AuthModel.php";
 require_once "./app/views/AuthView.php";
 require_once "./app/views/ErrorView.php";
+require_once "./app/controllers/AutoresController.php";
+require_once "./app/controllers/LibrosController.php";
 
 class AuthController
 {
   private $view;
   private $model;
   private $errorView;
+  private $LibrosController;
+  private $AutoresController;
 
   public function __construct()
   {
     $this->view = new AuthView();
     $this->model = new AuthModel();
     $this->errorView = new errorView();
+    $this->LibrosController = new LibrosController;
+    $this->AutoresController = new AutoresController;
   }
-  public function mostrarLogin(){
+  public function usuarioLogueado()
+  {
+    if (!isset($_SESSION['ID_USER'])) {
+      return header('Location: ' . BASE_URL . 'login');
+      die();
+    }
+  }
+  public function mostrarLogin()
+  {
     return $this->view->mostrarForm();
   }
   public function iniciarSesion()
@@ -41,11 +55,17 @@ class AuthController
       die();
     }
   }
-  public function mostrarHomeAdmin(){
-      //session_start();
-      $this->view->mostrarInicioLibros();
+  public function mostrarHomeAdmin()
+  {
+    //session_start();
+    $this->usuarioLogueado();
+    $libros = $this->LibrosController->obtenerLibros();
+    $autores = $this->AutoresController->obtenerAutores();
+
+    $this->view->mostrarPanelAdmin($libros, $autores);
   }
-  public function cerrarSesion() {
+  public function cerrarSesion()
+  {
     session_start();
     session_destroy();
     header('Location: home');

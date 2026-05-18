@@ -38,17 +38,20 @@ class LibrosController
       die();
     }
   }
-  public function mostrarHome(){
-   // session_start();
+  public function mostrarHome()
+  {
+    // session_start();
     $this->view->mostrarHome();
-    
-
+  }
+  public function obtenerLibros()
+  {
+    return $this->model->obtenerLibros();
   }
   public function mostrarInicioLibros()
   {
-    //$autores = $this->autoresController->obtenerAutores(); // chequear si se puede usar el controller de autores en el controller de libros
+    $autores = $this->autoresController->obtenerAutores(); // chequear si se puede usar el controller de autores en el controller de libros
     $libros = $this->model->obtenerLibros();
-    $this->view->mostrarInicioLibros($libros);
+    $this->view->mostrarInicioLibros($libros, $autores);
   }
   public function mostrarLibros()
   {
@@ -105,21 +108,46 @@ class LibrosController
     header("Location: " . BASE_URL);
   }
 
-  public function actualizarLibro()
-  {
+public function actualizarLibro()
+{
     $this->usuarioLogueado();
-    if (empty($_POST['titulo']) || empty($_POST['anio']) || empty($_POST['sinopsis']) || empty($_POST['disponible']) || empty($_POST['autor'])) {
-      $msj = "Complete los campos por favor.";
-      $this->errorView->mostrarError($msj);
-      die();
+
+    if (
+        empty($_POST['id_libro']) ||
+        empty($_POST['titulo']) ||
+        empty($_POST['anio']) ||
+        empty($_POST['sinopsis']) ||
+        empty($_POST['autor'])
+    ) {
+
+        $msj = "Complete los campos por favor.";
+        $this->errorView->mostrarError($msj);
+        die();
     }
+
+    $id_libro = $_POST['id_libro'];
     $titulo = $_POST['titulo'];
     $anio = $_POST['anio'];
     $sinopsis = $_POST['sinopsis'];
-    $disponible = $_POST['disponible'];
     $autor = $_POST['autor'];
-    $this->model->actualizarLibro($titulo, $sinopsis, $anio, $disponible, $autor);
+    $tapa = $_POST['tapa'];
+
+    if (isset($_POST['disponible'])) {
+        $disponible = 1;
+    } else {
+        $disponible = 0;
+    }
+
+    $this->model->actualizarLibro(
+        $id_libro,
+        $titulo,
+        $sinopsis,
+        $anio,
+        $disponible,
+        $tapa,
+        $autor
+    );
 
     header("Location: " . BASE_URL);
-  }
+}
 }
