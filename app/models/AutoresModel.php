@@ -42,7 +42,7 @@ class AutoresModel
   }
 
   public function agregarAutor($nombre, $fechaDeNacimiento, $nacionalidad, $biografia){
-    $query = $this->db->prepare("INSERT INTO libros('nombre', 'fechaDeNacimiento', 'nacionalidad', 'biografia') values(?,?,?,?)");
+    $query = $this->db->prepare("INSERT INTO autores(nombre, fecha_de_nacimiento, nacionalidad, biografia) VALUES(?, ?, ?, ?)");
     $query->execute([$nombre, $fechaDeNacimiento, $nacionalidad, $biografia]);
     return $this->db->lastInsertId();
   }
@@ -53,9 +53,25 @@ class AutoresModel
     return $query->rowCount();
   }
 
-  public function actualizarAutor($nombre, $fechaDeNacimiento, $nacionalidad, $biografia){
-    $query = $this->db->prepare("UPDATE autores SET 'nombre' = ?, 'fechaDeNacimiento' = ?, 'nacionalidad' = ?, 'biografia' = ?) values(?,?,?,?)");
-    $query->execute([$nombre, $fechaDeNacimiento, $nacionalidad, $biografia]);
+  public function actualizarAutor($id_autor, $nombre, $fechaDeNacimiento, $nacionalidad, $biografia){
+
+    $query = $this->db->prepare("
+        UPDATE autores
+        SET nombre = ?,
+            fecha_de_nacimiento = ?,
+            nacionalidad = ?,
+            biografia = ?
+        WHERE id_autor = ?
+    ");
+
+    $query->execute([
+        $nombre,
+        $fechaDeNacimiento,
+        $nacionalidad,
+        $biografia,
+        $id_autor
+    ]);
+
     return $query->rowCount();
-  }
+}
 }

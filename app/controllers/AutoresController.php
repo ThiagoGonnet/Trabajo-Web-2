@@ -66,17 +66,33 @@ class AutoresController
   }
 
   public function actualizarAutor()
-  {
-    if (empty($_POST['nombre']) || empty($_POST['fechaDeNacimeinto']) || empty($_POST['nacionalidad']) || empty($_POST['biografia'])) {
-      $msj = "Complete los campos por favor.";
-      $this->errorView->mostrarError($msj);
+{
+    if (
+        empty($_POST['id_autor']) ||
+        empty($_POST['nombre']) ||
+        empty($_POST['fechaDeNacimiento']) ||
+        empty($_POST['nacionalidad']) ||
+        empty($_POST['biografia'])
+    ) {
+        $msj = "Complete los campos por favor.";
+        $this->errorView->mostrarError($msj);
+        die();
     }
+
+    $id_autor = $_POST['id_autor'];
     $nombre = $_POST['nombre'];
     $fechaDeNacimiento = $_POST['fechaDeNacimiento'];
     $nacionalidad = $_POST['nacionalidad'];
     $biografia = $_POST['biografia'];
-    $this->model->actualizarAutor($nombre, $fechaDeNacimiento, $nacionalidad, $biografia);
+
+    $this->model->actualizarAutor(
+        $id_autor,
+        $nombre,
+        $fechaDeNacimiento,
+        $nacionalidad,
+        $biografia
+    );
 
     header("Location: " . BASE_URL);
-  }
+}
 }
