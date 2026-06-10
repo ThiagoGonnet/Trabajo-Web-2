@@ -2,57 +2,39 @@
 require_once "./app/models/LibrosModel.php";
 require_once "./app/views/LibrosView.php";
 require_once "./app/views/ErrorView.php";
-require_once "./app/controllers/AutoresController.php";
+require_once "./app/models/AutoresModel.php";
+require_once "./app/controllers/AuthController.php";
 
 class LibrosController
 {
   private $model;
   private $view;
   private $errorView;
-  private $autoresController;
+  private $autoresModel;
+  private $authController;
 
   public function __construct()
   {
     $this->model = new LibrosModel();
     $this->view = new LibrosView();
     $this->errorView = new ErrorView();
-    $this->autoresController = new AutoresController();
-  }
-  /*public function showHome(){
-    session_start();
-    $this->view->mostrarHeader();
-    $libros = $this->model->mostrarInicioLibros();
-    //if (!empty($_SESSION) && $_SESSION['logged']){
-     // $this->view->showCRUD($_SESSION['userName'],$categorias);
-      //$this->view->renderListProduct($products,$_SESSION['logged']);
-    //}else{
-      $this->view->mostrarHeader($libros);
-    //}
-   // $this->view->bodyHome();
-    $this->view->mostrarFooter();
-  }*/
-  public function usuarioLogueado()
-  {
-    if (!isset($_SESSION['ID_USER'])) {
-      return header('Location: ' . BASE_URL . 'login');
-      die();
-    }
+    $this->autoresModel = new AutoresModel();
+    $this->authController = new AuthController();
   }
   public function mostrarHome()
   {
-    // session_start();
     $this->view->mostrarHome();
   }
   public function obtenerLibros()
   {
     return $this->model->obtenerLibros();
   }
-  public function mostrarInicioLibros()
+  /*public function mostrarInicioLibros()
   {
-    $autores = $this->autoresController->obtenerAutores(); // chequear si se puede usar el controller de autores en el controller de libros
+    $autores = $this->autoresModel->obtenerAutores();
     $libros = $this->model->obtenerLibros();
-    $this->view->mostrarInicioLibros($libros, $autores);
-  }
+    $this->view->mostrarLibros($libros, $autores);
+  }*/
   public function mostrarLibros()
   {
     $libros = $this->model->obtenerLibros();
@@ -78,7 +60,7 @@ class LibrosController
 
   public function agregarLibro()
   {
-    $this->usuarioLogueado();
+    $this->authController->usuarioLogueado();
     if (empty($_POST['titulo']) || empty($_POST['anio']) || empty($_POST['sinopsis']) || empty($_POST['disponible']) || empty($_POST['autor'])) {
       $msj = "Complete los campos por favor.";
       $this->errorView->mostrarError($msj);
@@ -88,6 +70,7 @@ class LibrosController
     $anio = $_POST['anio'];
     $sinopsis = $_POST['sinopsis'];
     $disponible = $_POST['disponible'];
+    var_dump($disponible);
     $autor = $_POST['autor'];
     $this->model->agregarLibro($titulo, $sinopsis, $anio, $disponible, $autor);
 
@@ -96,7 +79,7 @@ class LibrosController
 
   public function eliminarLibro()
   {
-    $this->usuarioLogueado();
+    $this->authController->usuarioLogueado();
     if (empty($_POST['libroAEliminar'])) {
       $msj = "Elija un libro por favor.";
       $this->errorView->mostrarError($msj);
@@ -108,21 +91,21 @@ class LibrosController
     header("Location: " . BASE_URL);
   }
 
-public function actualizarLibro()
-{
-    $this->usuarioLogueado();
+  public function actualizarLibro()
+  {
+    $this->authController->usuarioLogueado();
 
     if (
-        empty($_POST['id_libro']) ||
-        empty($_POST['titulo']) ||
-        empty($_POST['anio']) ||
-        empty($_POST['sinopsis']) ||
-        empty($_POST['autor'])
+      empty($_POST['id_libro']) ||
+      empty($_POST['titulo']) ||
+      empty($_POST['anio']) ||
+      empty($_POST['sinopsis']) ||
+      empty($_POST['autor'])
     ) {
 
-        $msj = "Complete los campos por favor.";
-        $this->errorView->mostrarError($msj);
-        die();
+      $msj = "Complete los campos por favor.";
+      $this->errorView->mostrarError($msj);
+      die();
     }
 
     $id_libro = $_POST['id_libro'];
@@ -133,21 +116,21 @@ public function actualizarLibro()
     $tapa = $_POST['tapa'];
 
     if (isset($_POST['disponible'])) {
-        $disponible = 1;
+      $disponible = 1;
     } else {
-        $disponible = 0;
+      $disponible = 0;
     }
 
     $this->model->actualizarLibro(
-        $id_libro,
-        $titulo,
-        $sinopsis,
-        $anio,
-        $disponible,
-        $tapa,
-        $autor
+      $id_libro,
+      $titulo,
+      $sinopsis,
+      $anio,
+      $disponible,
+      $tapa,
+      $autor
     );
 
     header("Location: " . BASE_URL);
-}
+  }
 }
