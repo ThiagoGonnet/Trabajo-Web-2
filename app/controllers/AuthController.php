@@ -2,24 +2,24 @@
 require_once "./app/models/AuthModel.php";
 require_once "./app/views/AuthView.php";
 require_once "./app/views/ErrorView.php";
-require_once "./app/controllers/AutoresController.php";
-require_once "./app/controllers/LibrosController.php";
+require_once "./app/models/AutoresModel.php";
+require_once "./app/models/LibrosModel.php";
 
 class AuthController
 {
   private $view;
   private $model;
   private $errorView;
-  private $LibrosController;
-  private $AutoresController;
+  private $LibrosModel;
+  private $AutoresModel;
 
   public function __construct()
   {
     $this->view = new AuthView();
     $this->model = new AuthModel();
     $this->errorView = new errorView();
-    $this->LibrosController = new LibrosController;
-    $this->AutoresController = new AutoresController;
+    $this->LibrosModel = new LibrosModel;
+    $this->AutoresModel = new AutoresModel;
   }
   public function usuarioLogueado()
   {
@@ -59,8 +59,8 @@ class AuthController
   {
     //session_start();
     $this->usuarioLogueado();
-    $libros = $this->LibrosController->obtenerLibros();
-    $autores = $this->AutoresController->obtenerAutores();
+    $libros = $this->LibrosModel->obtenerLibros();
+    $autores = $this->AutoresModel->obtenerAutores();
 
     $this->view->mostrarPanelAdmin($libros, $autores);
   }
