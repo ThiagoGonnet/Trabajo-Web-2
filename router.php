@@ -63,14 +63,17 @@ switch ($params[0]) {
     $controller->mostrarAutorPorId($id);
     break;
   case 'agregarAutor':
+    $req = (new GuardMiddleware())->run($req);
     $controller = new AutoresController();
     $controller->agregarAutor();
     break;
   case 'eliminarAutor':
+    $req = (new GuardMiddleware())->run($req);
     $controller = new AutoresController();
     $controller->eliminarAutor();
     break;
   case 'actualizarAutor':
+    $req = (new GuardMiddleware())->run($req);
     $controller = new AutoresController();
     $controller->actualizarAutor();
     break;
