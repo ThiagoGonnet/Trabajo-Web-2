@@ -21,17 +21,12 @@ class AuthController
     $this->LibrosModel = new LibrosModel;
     $this->AutoresModel = new AutoresModel;
   }
-  public function usuarioLogueado()
-  {
-    if (!isset($_SESSION['ID_USER'])) {
-      return header('Location: ' . BASE_URL . 'login');
-      die();
-    }
-  }
+
   public function mostrarLogin()
   {
     return $this->view->mostrarForm();
   }
+
   public function iniciarSesion()
   {
     if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
@@ -57,8 +52,6 @@ class AuthController
   }
   public function mostrarHomeAdmin()
   {
-    //session_start();
-    $this->usuarioLogueado();
     $libros = $this->LibrosModel->obtenerLibros();
     $autores = $this->AutoresModel->obtenerAutores();
 

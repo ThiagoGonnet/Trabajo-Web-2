@@ -4,7 +4,6 @@ require_once "./app/models/LibrosModel.php";
 require_once "./app/views/LibrosView.php";
 require_once "./app/views/ErrorView.php";
 require_once "./app/models/AutoresModel.php";
-require_once "./app/controllers/AuthController.php";
 
 class LibrosController
 {
@@ -20,7 +19,6 @@ class LibrosController
     $this->view = new LibrosView();
     $this->errorView = new ErrorView();
     $this->autoresModel = new AutoresModel();
-    $this->authController = new AuthController();
   }
 
   public function mostrarHome()
@@ -67,7 +65,6 @@ class LibrosController
 
   public function agregarLibro()
   {
-    $this->authController->usuarioLogueado();
 
     if (
       !isset($_POST['titulo']) ||
@@ -117,7 +114,6 @@ class LibrosController
 
   public function eliminarLibro()
   {
-    $this->authController->usuarioLogueado();
 
     if (!isset($_POST['libroAEliminar'])) {
       $msj = "Elija un libro válido por favor.";
@@ -134,7 +130,6 @@ class LibrosController
 
   public function actualizarLibro()
   {
-    $this->authController->usuarioLogueado();
 
     if (
       !isset($_POST['id_libro']) ||

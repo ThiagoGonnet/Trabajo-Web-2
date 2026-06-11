@@ -5,6 +5,8 @@ require_once "./app/controllers/LibrosController.php";
 require_once "./app/controllers/AutoresController.php";
 require_once "./app/controllers/AuthController.php";
 require_once "./app/controllers/DeployController.php";
+require_once './app/middlewares/SessionMiddleware.php';
+require_once './app/middlewares/GuardMiddleware.php';
 
 session_start();
 
@@ -18,6 +20,9 @@ if (!empty($_GET['action'])) {
   $action = $_GET['action'];
 }
 $params = explode('/', $action);
+
+$req = new stdClass();
+$req = (new SessionMiddleware())->run($req); // Ejecuta el middleware de autenticación para verificar si el usuario está autenticado
 
 switch ($params[0]) {
   case 'home':
@@ -34,14 +39,17 @@ switch ($params[0]) {
     $controller->mostrarLibroPorId($id);
     break;
   case 'agregarLibro':
+    $req = (new GuardMiddleware())->run($req);
     $controller = new LibrosController();
     $controller->agregarLibro();
     break;
   case 'eliminarLibro':
+    $req = (new GuardMiddleware())->run($req);
     $controller = new LibrosController();
     $controller->eliminarLibro();
     break;
   case 'actualizarLibro':
+    $req = (new GuardMiddleware())->run($req);
     $controller = new LibrosController();
     $controller->actualizarLibro();
     break;
