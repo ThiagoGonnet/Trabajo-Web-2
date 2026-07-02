@@ -28,13 +28,13 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `autores` (
-  `id_autor` int(11) NOT NULL,
+  `id_autor` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(200) NOT NULL,
   `fecha_de_nacimiento` date NOT NULL,
   `nacionalidad` varchar(150) NOT NULL,
-  `biografia` text NOT NULL
+  `biografia` text NOT NULL,
+  PRIMARY KEY (`id_autor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 --
 -- Volcado de datos para la tabla `autores`
 --
