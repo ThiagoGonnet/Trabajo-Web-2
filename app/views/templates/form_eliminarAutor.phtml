@@ -1,0 +1,41 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-danger shadow">
+                <div class="card-header bg-danger text-white">
+                    <h1 class="h4 mb-0">Eliminar Autor</h1>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Seleccione el autor que desea quitar permanentemente de la biblioteca.</p>
+
+                    <form action="eliminarAutor" method="post">
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Autor a eliminar</label>
+                            <select name="autorAEliminar" class="form-select border-danger" required>
+                                <option value="" selected disabled>Elija un autor...</option>
+                                <?php foreach ($autores as $autor) : ?>
+                                    <?php var_dump($autor); ?>
+
+                                    <option value="<?php echo $autor->id_autor ?>">
+                                        <?php echo $autor->nombre ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-danger btn-lg">
+                                Confirmar Eliminación
+                            </button>
+                            <a href="home" class="btn btn-outline-secondary">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="alert alert-warning mt-3" role="alert">
+                <strong>Atención:</strong> Esta acción no se puede deshacer.
+            </div>
+        </div>
+    </div>
+</div>

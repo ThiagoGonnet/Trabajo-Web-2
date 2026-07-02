@@ -1,0 +1,93 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <div class="card shadow border-info">
+
+                <div class="card-header bg-info text-dark">
+                    <h1 class="h4 mb-0">Actualizar Autor</h1>
+                </div>
+
+                <div class="card-body">
+
+                    <p class="text-muted small">
+                        Seleccione un autor y modifique los campos necesarios.
+                    </p>
+
+                    <form action="<?= BASE_URL ?>actualizarAutor" method="post">
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Autor a editar</label>
+
+                            <select name="id_autor" class="form-select border-info" required>
+                                <option value="" selected disabled>
+                                    Seleccione un autor...
+                                </option>
+
+                                <?php foreach ($autores as $autor) : ?>
+                                    <option value="<?= $autor->id_autor ?>">
+                                        <?= $autor->nombre ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-8">
+                                <label class="form-label fw-bold">Nombre del Autor</label>
+
+                                <input type="text"
+                                    name="nombre"
+                                    class="form-control border-info"
+                                    placeholder="Editar nombre..."
+                                    required>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold">Fecha de nacimiento</label>
+
+                                <input type="date"
+                                    name="fechaDeNacimiento"
+                                    class="form-control border-info"
+                                    placeholder="YYYY"
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+
+                            <div class="col-md-8">
+                                <label class="form-label fw-bold">Nacionalidad</label>
+
+                                <input type="text"
+                                    name="nacionalidad"
+                                    class="form-control border-info"
+                                    placeholder="Editar nacionalidad..."
+                                    required>
+                            </div>
+
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Biografia</label>
+
+                            <textarea name="biografia"
+                                class="form-control border-info"
+                                rows="3"
+                                required></textarea>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-info btn-lg">
+                                Actualizar Datos
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

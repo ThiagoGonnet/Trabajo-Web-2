@@ -1,0 +1,40 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h1 class="h4 mb-0">Agregar Autor</h1>
+                </div>
+                <div class="card-body">
+                    <form action="agregarAutor" method="post">
+
+                        <div class="row mb-3">
+                            <div class="col-md-8">
+                                <label class="form-label">Nombre del Autor</label>
+                                <input type="text" name="nombre" class="form-control" placeholder="Ej: Stephen King" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Fecha de nacimiento</label>
+                                <input type="date" name="fechaDeNacimiento" class="form-control" placeholder="YYYY" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-8">
+                                <label class="form-label">Nacionalidad</label>
+                                <input type="text" name="nacionalidad" class="form-control" placeholder="Ej: Argentina" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Biografia</label>
+                                <textarea name="biografia" class="form-control" rows="3" placeholder="Breve resumen del autor..." required></textarea>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-success btn-lg">Guardar Autor</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
