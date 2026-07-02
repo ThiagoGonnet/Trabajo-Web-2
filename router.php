@@ -4,7 +4,6 @@ require_once "./app/controllers/UsuariosController.php";
 require_once "./app/controllers/LibrosController.php";
 require_once "./app/controllers/AutoresController.php";
 require_once "./app/controllers/AuthController.php";
-require_once "./app/controllers/DeployController.php";
 require_once './app/middlewares/SessionMiddleware.php';
 require_once './app/middlewares/GuardMiddleware.php';
 
@@ -89,14 +88,6 @@ switch ($params[0]) {
   case 'home-admin':
     $controller = new AuthController();
     $controller->mostrarHomeAdmin();
-    /*case 'register':
-      $controller = new UsuariosController();
-      $controller->mostrarFormRegistro();
-      break;*/
-    break;
-  case 'deploy': // on demand
-    $controller = new DeployController();
-    $controller->deploy();
     break;
   default:
     echo "Error 404 not found";
