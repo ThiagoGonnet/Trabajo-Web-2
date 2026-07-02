@@ -11,8 +11,7 @@ class LibrosController
   private $view;
   private $errorView;
   private $autoresModel;
-  private $authController;
-
+  
   public function __construct()
   {
     $this->model = new LibrosModel();
