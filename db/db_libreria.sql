@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-05-2026 a las 17:40:26
+-- Tiempo de generación: 02-07-2026 a las 17:40:26
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -28,13 +28,13 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `autores` (
-  `id_autor` int(11) NOT NULL AUTO_INCREMENT,
+  `id_autor` int(11) NOT NULL,
   `nombre` varchar(200) NOT NULL,
   `fecha_de_nacimiento` date NOT NULL,
   `nacionalidad` varchar(150) NOT NULL,
-  `biografia` text NOT NULL,
-  PRIMARY KEY (`id_autor`)
+  `biografia` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Volcado de datos para la tabla `autores`
 --
@@ -79,7 +79,6 @@ INSERT INTO `libros` (`id_libro`, `titulo`, `sinopsis`, `anio_de_publicacion`, `
 (5, 'Rayuela', 'Novela experimental considerada una obra maestra.', '1963', 1, 'rayuela.jpg', 3),
 (6, 'Bestiario', 'Colección de cuentos fantásticos.', '1951', 1, 'bestiario.jpg', 3),
 (7, 'La casa de los espíritus', 'Saga familiar ambientada en Chile.', '1982', 1, 'casa_espiritus.jpg', 4),
-(8, 'Eva Luna', 'Historia de una joven narradora llena de imaginación.', '1987', 1, 'eva_luna.jpg', 4),
 (9, 'La ciudad y los perros', 'Crítica al sistema militar peruano.', '1963', 1, 'ciudad_perros.jpg', 5),
 (10, 'Conversación en La Catedral', 'Reflexión sobre la corrupción política.', '1969', 1, 'catedral.jpg', 5),
 (11, 'It', 'Un grupo de amigos enfrenta a una entidad maligna.', '1986', 1, 'it.jpg', 6),
@@ -89,8 +88,7 @@ INSERT INTO `libros` (`id_libro`, `titulo`, `sinopsis`, `anio_de_publicacion`, `
 (15, '1984', 'Sociedad totalitaria controlada por el Gran Hermano.', '1949', 1, '1984.jpg', 8),
 (16, 'Rebelión en la granja', 'Fábula política protagonizada por animales.', '1945', 1, 'granja.jpg', 8),
 (17, 'El Principito', 'Relato filosófico sobre la amistad y la vida.', '1943', 1, 'principito.jpg', 9),
-(18, 'El Alquimista', 'Viaje espiritual de un joven pastor.', '1988', 1, 'alquimista.jpg', 10),
-(19, 'Brida', 'Historia de una joven en búsqueda espiritual.', '1990', 1, 'brida.jpg', 10);
+(18, 'El Alquimista', 'Viaje espiritual de un joven pastor.', '1988', 1, 'alquimista.jpg', 10);
 
 -- --------------------------------------------------------
 
@@ -126,7 +124,8 @@ ALTER TABLE `autores`
 -- Indices de la tabla `libros`
 --
 ALTER TABLE `libros`
-  ADD PRIMARY KEY (`id_libro`);
+  ADD PRIMARY KEY (`id_libro`),
+  ADD KEY `id_autor` (`id_autor`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -142,7 +141,17 @@ ALTER TABLE `autores`
 -- AUTO_INCREMENT de la tabla `libros`
 --
 ALTER TABLE `libros`
-  MODIFY `id_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `libros`
+--
+ALTER TABLE `libros`
+  ADD CONSTRAINT `libros_ibfk_1` FOREIGN KEY (`id_autor`) REFERENCES `autores` (`id_autor`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
